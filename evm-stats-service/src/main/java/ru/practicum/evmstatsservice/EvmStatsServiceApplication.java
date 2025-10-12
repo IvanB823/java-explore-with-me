@@ -7,9 +7,9 @@ import ru.practicum.statsclient.StatsClientImpl;
 
 @SpringBootApplication
 @Import({StatsClientImpl.class})
-public class EwmServiceApplication {
+public class EvmStatsServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EwmServiceApplication.class, args);
+        SpringApplication.run(EvmStatsServiceApplication.class, args);
     }
 }
