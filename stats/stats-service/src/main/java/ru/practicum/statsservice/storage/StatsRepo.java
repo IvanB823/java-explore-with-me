@@ -2,7 +2,6 @@ package ru.practicum.statsservice.storage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.practicum.statsdto.Stat;
 import ru.practicum.statsservice.model.Hit;
 
 import java.time.LocalDateTime;

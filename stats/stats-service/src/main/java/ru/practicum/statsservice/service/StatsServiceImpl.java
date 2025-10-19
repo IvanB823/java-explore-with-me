@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.statsdto.HitDto;
-import ru.practicum.statsdto.Stat;
 import ru.practicum.statsservice.exception.InvalidPeriodException;
 import ru.practicum.statsservice.mapper.AppMapper;
 import ru.practicum.statsservice.mapper.HitMapper;

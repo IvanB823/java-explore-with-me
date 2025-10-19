@@ -1,9 +1,6 @@
 package ru.practicum.statsservice.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.practicum.statsdto.HitDto;
-import ru.practicum.statsdto.HitOutputDto;
-import ru.practicum.statsdto.HitsDto;
 import ru.practicum.statsservice.model.App;
 import ru.practicum.statsservice.model.Hit;
 
