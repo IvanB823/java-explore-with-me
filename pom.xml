@@ -14,7 +14,8 @@
 	<modules>
 		<module>stats</module>
 		<module>ewm-service</module>
-	</modules>
+        <module>postman</module>
+    </modules>
 
 	<groupId>ru.practicum</groupId>
 	<artifactId>explore-with-me</artifactId>
