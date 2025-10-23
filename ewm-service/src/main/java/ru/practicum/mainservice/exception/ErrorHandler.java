@@ -1,10 +1,10 @@
 package ru.practicum.mainservice.exception;
+
 import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import ru.practicum.mainservice.MainCommonUtils;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
 @RestControllerAdvice
 @Slf4j
 public class ErrorHandler {
@@ -29,6 +31,7 @@ public class ErrorHandler {
         private final String errors;
         private final String timestamp;
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleValidationException(final MethodArgumentNotValidException exception) {
@@ -40,6 +43,7 @@ public class ErrorHandler {
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
     }
+
     @ExceptionHandler({MethodArgumentTypeMismatchException.class, ConstraintViolationException.class,
             MissingServletRequestParameterException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -51,23 +55,13 @@ public class ErrorHandler {
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
     }
+
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handleNotFoundException(final NotFoundException exception) {
         log.error(exception.toString());
         return new ApiError(HttpStatus.NOT_FOUND.name(),
                 "The required object was not found.",
-                exception.getMessage(),
-                getErrors(exception),
-                LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
-    }
-
-    @ExceptionHandler(EmptyResultDataAccessException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiError handleEmptyResultDataAccessException(final EmptyResultDataAccessException exception) {
-        log.error(exception.toString());
-        return new ApiError(HttpStatus.NOT_FOUND.name(),
-                "The Object id Empty.",
                 exception.getMessage(),
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
@@ -83,6 +77,7 @@ public class ErrorHandler {
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
     }
+
     @ExceptionHandler(ForbiddenException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleForbiddenException(final ForbiddenException exception) {
@@ -93,6 +88,7 @@ public class ErrorHandler {
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
     }
+
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleBadRequestException(final BadRequestException exception) {
@@ -103,6 +99,7 @@ public class ErrorHandler {
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
     }
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleException(final Exception exception) {
@@ -113,6 +110,7 @@ public class ErrorHandler {
                 getErrors(exception),
                 LocalDateTime.now().format(MainCommonUtils.DT_FORMATTER));
     }
+
     private String getErrors(Exception exception) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
